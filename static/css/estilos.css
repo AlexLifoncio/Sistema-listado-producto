@@ -1,0 +1,313 @@
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --primary-light: #eef2ff;
+    --success: #16a34a;
+    --danger: #dc2626;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --bg: #f1f5f9;
+    --card: #ffffff;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --radius: 12px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.header h1 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.header .badge {
+    display: inline-block;
+    margin-top: 0.6rem;
+    padding: 0.3rem 0.9rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-light);
+    border-radius: 999px;
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.8rem;
+    margin-bottom: 1.8rem;
+}
+
+.card h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: var(--text);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.menu a {
+    display: block;
+    padding: 1rem 1.3rem;
+    text-align: center;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--primary);
+    background: var(--primary-light);
+    border: 1px solid var(--primary);
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+}
+
+.menu a:hover {
+    background: var(--primary);
+    color: #ffffff;
+    transform: translateY(-2px);
+}
+
+.link-back {
+    display: inline-block;
+    margin-top: 1.2rem;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-back:hover {
+    text-decoration: underline;
+}
+
+form .field {
+    margin-bottom: 1.1rem;
+}
+
+form .field label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    color: var(--text-muted);
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 0.7rem;
+    font-size: 0.95rem;
+    border: 1px dashed var(--primary);
+    border-radius: var(--radius);
+    background: var(--primary-light);
+    color: var(--text);
+    cursor: pointer;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+thead th {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    text-align: left;
+    padding: 0.8rem 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary);
+}
+
+tbody td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+tbody tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.empty {
+    text-align: center;
+    padding: 2.5rem;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+tfoot th {
+    padding: 0.8rem 1rem;
+    font-weight: 700;
+    color: #ffffff;
+    background: var(--primary);
+    text-align: left;
+}
+
+.fecha-separador td {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 700;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--primary);
+}
+
+.tabla-resumen th:first-child,
+.tabla-resumen td:first-child {
+    min-width: 130px;
+}
+
+.tabla-productos th:nth-child(3),
+.tabla-productos td:nth-child(3) {
+    min-width: 130px;
+}
+
+.chart {
+    width: 100%;
+}
+
+.sub-grafico {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.8rem;
+    color: var(--text);
+}
+
+.leyenda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.leyenda-caja {
+    display: inline-block;
+    width: 80px;
+    height: 14px;
+    background: #636efa;
+    border-radius: 2px;
+}
+
+.ayuda {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+.ayuda strong {
+    color: var(--text);
+}
+
+.mensajes {
+    margin-bottom: 1.2rem;
+}
+
+.mensaje {
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.mensaje-error {
+    color: var(--danger);
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+}
+
+.mensaje-exito {
+    color: var(--success);
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+}
+
+.acciones-formato {
+    margin-top: 1.2rem;
+}
+
+.tabla-formato th:first-child,
+.tabla-formato td:first-child {
+    width: 70px;
+    text-align: center;
+}
+
+.tabla-formato code {
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.88rem;
+    color: var(--primary-dark);
+}
+
+@media (max-width: 640px) {
+    .container {
+        padding: 1.2rem;
+    }
+
+    .card {
+        padding: 1.2rem;
+    }
+
+    thead th, tbody td {
+        padding: 0.6rem 0.7rem;
+    }
+}
