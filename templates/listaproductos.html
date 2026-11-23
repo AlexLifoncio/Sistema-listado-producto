@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Productos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Listado de Productos</h1>
+            <span class="badge">Ventas por fecha</span>
+        </div>
+
+        {% with mensajes = get_flashed_messages(with_categories=true) %}
+        {% if mensajes %}
+        <div class="mensajes">
+            {% for categoria, mensaje in mensajes %}
+            <p class="mensaje mensaje-{{ categoria }}">{{ mensaje }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="card">
+            <h2>Importar información de Excel</h2>
+            <p class="ayuda">
+                Cargue un archivo <strong>.xlsx</strong>, <strong>.xlsm</strong> o
+                <strong>.xls</strong>. El programa valida la estructura y los datos
+                antes de importar.
+            </p>
+            <form action="{{ url_for('leer_excel') }}" method="POST" enctype="multipart/form-data">
+                <div class="field">
+                    <label>Seleccione el archivo Excel para importar los datos</label>
+                    <input type="file" name="archivo_a_subir" accept=".xlsx,.xlsm,.xls" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Importar data</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <h2>Formato requerido del Excel</h2>
+            <p class="ayuda">
+                El archivo debe tener una hoja llamada <strong>Productos</strong>.
+                La primera fila debe contener estos encabezados. Se recomienda
+                mantener el orden indicado; el programa reconoce las columnas por
+                su nombre y también acepta variantes como
+                <strong>Código de Producto</strong> o
+                <strong>Cantidad Vendida</strong>.
+            </p>
+            <div class="table-wrap">
+                <table class="tabla-formato">
+                    <thead>
+                        <tr>
+                            <th>Orden</th>
+                            <th>Columna</th>
+                            <th>Tipo de dato</th>
+                            <th>Ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><code>codigo</code></td>
+                            <td>Número o texto</td>
+                            <td>101</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td><code>producto</code></td>
+                            <td>Texto</td>
+                            <td>Arroz 1 kg</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td><code>fecha</code></td>
+                            <td>Fecha DD/MM/AAAA</td>
+                            <td>15/08/2026</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td><code>cantidad</code></td>
+                            <td>Número mayor que cero</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td><code>precio</code></td>
+                            <td>Número mayor o igual a cero</td>
+                            <td>10.50</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td><code>subtotal</code></td>
+                            <td>Número mayor o igual a cero</td>
+                            <td>21.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="ayuda">
+                No use celdas combinadas ni filas de totales. Los encabezados
+                deben estar en la primera fila y cada fila debe representar una
+                venta. Reemplace la fila de ejemplo de la plantilla por sus
+                propios datos.
+            </p>
+            <div class="acciones-formato">
+                <a href="{{ url_for('descargar_formato') }}" class="btn btn-primary">Descargar formato Excel</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Ventas por fecha</h2>
+            <div class="table-wrap">
+                <table class="tabla-productos">
+                    <thead>
+                        <tr>
+                            <th>Código de Producto</th>
+                            <th>Producto</th>
+                            <th>Fecha</th>
+                            <th>Cantidad Vendida</th>
+                            <th>Precio Unitario(S/)</th>
+                            <th>Sub total(S/)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for p in productos %}
+                        <tr>
+                            <td>{{ p.codigo }}</td>
+                            <td>{{ p.producto }}</td>
+                            <td>{{ p.fecha }}</td>
+                            <td>{{ p.cantidad }}</td>
+                            <td>{{ "{:,.2f}".format(p.precio) }}</td>
+                            <td>{{ "{:,.2f}".format(p.subtotal) }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="empty">Aún no hay datos. Importe el archivo Excel para ver las ventas.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">TOTAL</th>
+                            <th>{{ total_cantidad }}</th>
+                            <th></th>
+                            <th>S/{{ "{:,.2f}".format(total_monto) }}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <a href="{{ url_for('inicio') }}" class="link-back">← Volver al inicio</a>
+    </div>
+</body>
+</html>

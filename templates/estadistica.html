@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadística | Top 5</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Gráfico estadístico: Top 5 productos más vendidos</h1>
+            <span class="badge">{{ periodo if periodo else "Sin datos cargados" }}</span>
+        </div>
+
+        <div class="card">
+            {% if grafico %}
+            <h2 class="sub-grafico">Top 5 productos más vendidos{% if periodo %} - {{ periodo }}{% endif %}</h2>
+            <div class="chart">{{ grafico | safe }}</div>
+            {% else %}
+            <p class="empty">{{ mensaje }}</p>
+            {% endif %}
+        </div>
+
+        <a href="{{ url_for('inicio') }}" class="link-back">← Volver al inicio</a>
+    </div>
+</body>
+</html>

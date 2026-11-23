@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Reporte de Ventas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Reporte de Ventas{% if periodo %} - {{ periodo }}{% endif %}</h1>
+            <span class="badge">Empresa de Distribución de Productos</span>
+        </div>
+
+        <div class="card">
+            <h2>Opciones del sistema</h2>
+            <div class="menu">
+                <a href="{{ url_for('listaproductos') }}">Listado de Productos</a>
+                <a href="{{ url_for('resumen') }}">Resumen de Ventas</a>
+                <a href="{{ url_for('estadistica') }}">Gráfico estadístico de los top 5 productos</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

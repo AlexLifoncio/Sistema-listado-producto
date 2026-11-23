@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen de Ventas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Resumen de Ventas</h1>
+            <span class="badge">{{ periodo if periodo else "Sin datos cargados" }}</span>
+        </div>
+
+        <div class="card">
+            <h2>Ventas por fecha y producto</h2>
+            <div class="table-wrap">
+                <table class="tabla-resumen">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Código de producto</th>
+                            <th>Nombre del producto</th>
+                            <th>Cantidad total vendida</th>
+                            <th>Precio unitario (S/)</th>
+                            <th>Importe total (S/)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for grupo in grupos %}
+                        <tr class="fecha-separador">
+                            <td colspan="6">{{ grupo.fecha }}</td>
+                        </tr>
+                        {% for v in grupo.productos %}
+                        <tr>
+                            <td>{{ v.fecha }}</td>
+                            <td>{{ v.codigo }}</td>
+                            <td>{{ v.producto }}</td>
+                            <td>{{ v.cantidad }}</td>
+                            <td>{{ "{:,.2f}".format(v.precio) }}</td>
+                            <td>{{ "{:,.2f}".format(v.subtotal) }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="empty">Aún no hay datos. Importe el archivo Excel para ver el resumen.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">TOTAL DEL PERIODO</th>
+                            <th>{{ total_cantidad }}</th>
+                            <th></th>
+                            <th>S/ {{ "{:,.2f}".format(total_monto) }}</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+        <a href="{{ url_for('inicio') }}" class="link-back">← Volver al inicio</a>
+    </div>
+</body>
+</html>
